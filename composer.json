@@ -1,0 +1,26 @@
+{
+    "name": "saxulum/saxulum-message-queue",
+    "description": "Saxulum Message Queue",
+    "keywords": ["saxulum", "message-queue", "system-v"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dominik Zogg",
+            "email": "dominik.zogg@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "~7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.0"
+    },
+    "autoload": {
+        "psr-4": { "Saxulum\\MessageQueue\\": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
