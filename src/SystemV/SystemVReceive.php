@@ -24,8 +24,9 @@ final class SystemVReceive implements MessageReceiveInterface
 
     /**
      * @param string $messageClass
-     * @param int $key
-     * @param int $type
+     * @param int    $key
+     * @param int    $type
+     *
      * @throws \Exception
      */
     public function __construct(string $messageClass, int $key, int $type = 1)
@@ -37,6 +38,7 @@ final class SystemVReceive implements MessageReceiveInterface
 
     /**
      * @return null|MessageInterface
+     *
      * @throws \Exception
      */
     public function receive()

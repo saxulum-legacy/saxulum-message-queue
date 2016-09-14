@@ -6,6 +6,7 @@ interface MessageInterface
 {
     /**
      * @param string $json
+     *
      * @return MessageInterface
      */
     public static function fromJson(string $json): MessageInterface;
