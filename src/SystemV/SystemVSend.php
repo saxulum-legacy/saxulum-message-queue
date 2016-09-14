@@ -40,6 +40,7 @@ final class SystemVSend implements MessageSendInterface
     {
         $errorCode = null;
         $json = $message->toJson();
+
         if (false === msg_send($this->queue, $this->type, $json, false, true, $errorCode)) {
             throw new \Exception(sprintf('Can\'t send message, error code %d, %s', $errorCode, $json), $errorCode);
         }
