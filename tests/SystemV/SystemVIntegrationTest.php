@@ -1,17 +1,20 @@
 <?php
 
-namespace Saxulum\Tests\MessageQueue;
+namespace Saxulum\Tests\MessageQueue\SystemV;
 
 use PHPUnit\Framework\TestCase;
 use Saxulum\MessageQueue\SystemV\SystemVReceive;
 use Saxulum\Tests\MessageQueue\Resources\SampleMessage;
 use Symfony\Component\Process\Process;
 
-class SystemVTest extends TestCase
+/**
+ * @group integration
+ */
+class SystemVIntegrationTest extends TestCase
 {
     public function testWithSubProcess()
     {
-        $subProcessPath = __DIR__.'/Resources/SystemVSubProcess.php';
+        $subProcessPath = __DIR__.'/SystemVSubProcess.php';
 
         /** @var Process[] $subProcesses */
         $subProcesses = [];
