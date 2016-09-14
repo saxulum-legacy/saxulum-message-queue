@@ -88,8 +88,6 @@ EOT;
 
     /**
      * @runInSeparateProcess
-     * @expectedException \Exception
-     * @expectedExceptionMessage Can't receive message, error code 1000
      */
     public function testWithErrorCode()
     {
