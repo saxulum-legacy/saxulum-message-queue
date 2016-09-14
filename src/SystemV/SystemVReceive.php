@@ -45,17 +45,17 @@ final class SystemVReceive implements MessageReceiveInterface
     {
         $type = null;
         $json = null;
-        $error = null;
+        $errorCode = null;
 
-        $status = msg_receive($this->queue, $this->type, $type, 1048576, $json, false, MSG_IPC_NOWAIT, $error);
+        $status = msg_receive($this->queue, $this->type, $type, 1048576, $json, false, MSG_IPC_NOWAIT, $errorCode);
 
         if (false === $status) {
             // we do not wait for a message (prevent lock)
-            if (MSG_ENOMSG === $error) {
+            if (MSG_ENOMSG === $errorCode) {
                 return null;
             }
 
-            throw new \Exception(sprintf('Can\'t receive message, error code %d', $error));
+            throw new \Exception(sprintf('Can\'t receive message, error code %d', $errorCode), $errorCode);
         }
 
         /** @var MessageInterface $messageClass */

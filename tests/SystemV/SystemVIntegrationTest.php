@@ -12,6 +12,9 @@ use Symfony\Component\Process\Process;
  */
 class SystemVIntegrationTest extends TestCase
 {
+    /**
+     * @runInSeparateProcess
+     */
     public function testWithSubProcess()
     {
         $subProcessPath = __DIR__.'/SystemVSubProcess.php';
