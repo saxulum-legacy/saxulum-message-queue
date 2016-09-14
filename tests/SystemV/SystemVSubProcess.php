@@ -17,7 +17,7 @@ if (!isset($argv[2])) {
 $send = new SystemVSend($argv[1]);
 
 for ($i = 0; $i < 100; ++$i) {
-    $message = new SampleMessage($argv[2], $i, $i % 2 === 0, $i % 2 !== 0);
+    $message = new SampleMessage($argv[2], sprintf('message %d', $i));
     $send->send($message);
 
     echo $message->toJson().PHP_EOL;

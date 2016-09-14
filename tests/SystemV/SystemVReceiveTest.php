@@ -37,7 +37,7 @@ namespace Saxulum\MessageQueue\SystemV
         int $flags = 0,
         int &$errorcode = null
     ): bool {
-        $message = (new SampleMessage('sample1', 1, 1, 0))->toJson();
+        $message = (new SampleMessage('subprocess1', 'message 1'))->toJson();
     
         return true;
     }

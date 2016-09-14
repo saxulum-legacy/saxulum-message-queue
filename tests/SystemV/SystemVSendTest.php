@@ -42,7 +42,7 @@ EOT;
         eval($cFunctions);
 
         $sender = new SystemVSend(1);
-        $sender->send(new SampleMessage('sample1', 1, 0, 0));
+        $sender->send(new SampleMessage('subprocess1', 'message 1'));
     }
 
     /**
@@ -52,7 +52,7 @@ EOT;
     {
         self::expectException(\Exception::class);
         self::expectExceptionMessage(
-            'Can\'t send message, error code 1000, {"context":"sample1","total":1,"success":0,"failed":0}'
+            'Can\'t send message, error code 1000, {"context":"subprocess1","message":"message 1"}'
         );
         self::expectExceptionCode(1000);
 
@@ -83,6 +83,6 @@ EOT;
         eval($cFunctions);
 
         $sender = new SystemVSend(1);
-        $sender->send(new SampleMessage('sample1', 1, 0, 0));
+        $sender->send(new SampleMessage('subprocess1', 'message 1'));
     }
 }

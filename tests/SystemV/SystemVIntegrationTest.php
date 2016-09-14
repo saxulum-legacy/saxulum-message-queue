@@ -66,7 +66,7 @@ class SystemVIntegrationTest extends TestCase
             $receivedMessagesBySubProcesses[$context][] = $receivedMessage;
         }
 
-        self::assertSame(24950, strlen($output));
+        self::assertSame(19450, strlen($output));
         self::assertEmpty($errorOutput, $errorOutput);
         self::assertCount(500, $receivedMessages);
         self::assertCount(5, $receivedMessagesBySubProcesses);

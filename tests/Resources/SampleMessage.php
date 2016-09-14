@@ -12,19 +12,9 @@ class SampleMessage implements MessageInterface
     private $context;
 
     /**
-     * @var int
+     * @var string
      */
-    private $total;
-
-    /**
-     * @var int
-     */
-    private $success;
-
-    /**
-     * @var int
-     */
-    private $failed;
+    private $message;
 
     /**
      * @param string $json
@@ -35,7 +25,7 @@ class SampleMessage implements MessageInterface
     {
         $rawMessage = json_decode($json);
 
-        return new self($rawMessage->context, $rawMessage->total, $rawMessage->success, $rawMessage->failed);
+        return new self($rawMessage->context, $rawMessage->message);
     }
 
     /**
@@ -45,24 +35,18 @@ class SampleMessage implements MessageInterface
     {
         return json_encode([
             'context' => $this->context,
-            'total' => $this->total,
-            'success' => $this->success,
-            'failed' => $this->failed,
+            'message' => $this->message,
         ]);
     }
 
     /**
      * @param string $context
-     * @param int    $total
-     * @param int    $success
-     * @param int    $failed
+     * @param string $message
      */
-    public function __construct(string $context, int $total, int $success, int $failed)
+    public function __construct(string $context, string $message)
     {
         $this->context = $context;
-        $this->total = $total;
-        $this->success = $success;
-        $this->failed = $failed;
+        $this->message = $message;
     }
 
     /**
@@ -74,26 +58,10 @@ class SampleMessage implements MessageInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getTotal(): int
+    public function getMessage(): string
     {
-        return $this->total;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSuccess(): int
-    {
-        return $this->success;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFailed(): int
-    {
-        return $this->failed;
+        return $this->message;
     }
 }
