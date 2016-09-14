@@ -19,11 +19,14 @@ class SystemVTest extends TestCase
             $subProcesses[] = new Process($subProcessPath.' 1 '.$i);
         }
 
+        $output = '';
         $errorOutput = '';
 
         foreach ($subProcesses as $subProcess) {
-            $subProcess->start(function ($type, $buffer) use (&$errorOutput) {
-                if (Process::ERR === $type) {
+            $subProcess->start(function ($type, $buffer) use (&$output, &$errorOutput) {
+                if (Process::OUT === $type) {
+                    $output .= $buffer;
+                } elseif (Process::ERR === $type) {
                     $errorOutput .= $buffer;
                 }
             });
@@ -57,6 +60,7 @@ class SystemVTest extends TestCase
             $receivedMessagesBySubProcesses[$context][] = $receivedMessage;
         }
 
+        self::assertSame(24950, strlen($output));
         self::assertEmpty($errorOutput, $errorOutput);
         self::assertCount(500, $receivedMessages);
         self::assertCount(5, $receivedMessagesBySubProcesses);
