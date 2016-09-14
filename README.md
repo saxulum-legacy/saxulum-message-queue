@@ -19,6 +19,30 @@ Through [Composer](http://getcomposer.org) as [saxulum/saxulum-message-queue][1]
 
 ## Usage
 
+### SystemV
+
+#### Send
+
+```{.php}
+<?php
+
+use Saxulum\MessageQueue\SystemV\SystemVSend;
+
+$sender = new SystemVSend(1);
+$sender->send(new <MessageInterface>);
+```
+
+#### Receive
+
+```{.php}
+<?php
+
+use Saxulum\MessageQueue\SystemV\SystemVReceive;
+
+$sender = new SystemVReceive(<MessageInterface::class>, 1);
+$message = $sender->receive();
+```
+
 [1]: https://packagist.org/packages/saxulum/saxulum-message-queue
 
 ## Copyright
