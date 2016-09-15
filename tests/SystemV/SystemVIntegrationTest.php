@@ -45,7 +45,6 @@ class SystemVIntegrationTest extends TestCase
 
         do {
             $subProcessesRunning = [];
-
             foreach ($subProcesses as $subProcess) {
                 if ($subProcess->isRunning()) {
                     $subProcessesRunning[] = $subProcess;
