@@ -23,17 +23,24 @@ final class SystemVReceive implements MessageReceiveInterface
     private $type;
 
     /**
-     * @param string $messageClass
-     * @param int    $key
-     * @param int    $type
-     *
-     * @throws \Exception
+     * @var int
      */
-    public function __construct(string $messageClass, int $key, int $type = 1)
+    private $qbytes;
+
+    /**
+     * @param string $messageClass
+     * @param int $key
+     * @param int $type
+     * @param int $qbytes
+     */
+    public function __construct(string $messageClass, int $key, int $type = 1, int $qbytes = 16384)
     {
         $this->messageClass = $messageClass;
         $this->queue = msg_get_queue($key);
         $this->type = $type;
+        $this->qbytes = $qbytes;
+
+        msg_set_queue($this->queue, ['msg_qbytes' => $this->qbytes]);
     }
 
     /**
@@ -47,7 +54,16 @@ final class SystemVReceive implements MessageReceiveInterface
         $json = null;
         $errorCode = null;
 
-        $status = msg_receive($this->queue, $this->type, $type, 1048576, $json, false, MSG_IPC_NOWAIT, $errorCode);
+        $status = msg_receive(
+            $this->queue,
+            $this->type,
+            $type,
+            $this->qbytes / 2,
+            $json,
+            false,
+            MSG_IPC_NOWAIT,
+            $errorCode
+        );
 
         if (false === $status) {
             // we do not wait for a message (prevent lock)
