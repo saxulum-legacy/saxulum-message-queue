@@ -24,6 +24,8 @@ namespace Saxulum\MessageQueue\SystemV
     
     function msg_get_queue(int $key): \stdClass
     {
+        \PHPUnit\Framework\TestCase::assertSame(1, $key);
+
         return new \stdClass();
     }
     
@@ -35,6 +37,12 @@ namespace Saxulum\MessageQueue\SystemV
         bool $blocking = true,
         int &$errorcode = null
     ) {
+        \PHPUnit\Framework\TestCase::assertSame(1, $msgtype);
+        \PHPUnit\Framework\TestCase::assertSame((new SampleMessage('subprocess1', 'message 1'))->toJson(), $message);
+        \PHPUnit\Framework\TestCase::assertFalse($serialize);
+        \PHPUnit\Framework\TestCase::assertTrue($blocking);
+        \PHPUnit\Framework\TestCase::assertNull($errorcode);
+
         return true;
     }
 }
@@ -63,6 +71,8 @@ namespace Saxulum\MessageQueue\SystemV
     
     function msg_get_queue(int $key): \stdClass
     {
+        \PHPUnit\Framework\TestCase::assertSame(1, $key);
+
         return new \stdClass();
     }
     
@@ -74,6 +84,12 @@ namespace Saxulum\MessageQueue\SystemV
         bool $blocking = true,
         int &$errorcode = null
     ) {
+        \PHPUnit\Framework\TestCase::assertSame(1, $msgtype);
+        \PHPUnit\Framework\TestCase::assertSame((new SampleMessage('subprocess1', 'message 1'))->toJson(), $message);
+        \PHPUnit\Framework\TestCase::assertFalse($serialize);
+        \PHPUnit\Framework\TestCase::assertTrue($blocking);
+        \PHPUnit\Framework\TestCase::assertNull($errorcode);
+
         $errorcode = 1000;
 
         return false;
