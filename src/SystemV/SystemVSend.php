@@ -20,8 +20,6 @@ final class SystemVSend implements MessageSendInterface
     /**
      * @param int $key
      * @param int $type
-     *
-     * @throws \Exception
      */
     public function __construct(int $key, int $type = 1)
     {
