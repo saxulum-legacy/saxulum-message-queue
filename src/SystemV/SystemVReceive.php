@@ -25,22 +25,22 @@ final class SystemVReceive implements MessageReceiveInterface
     /**
      * @var int
      */
-    private $qbytes;
+    private $maxBytesPerMessage;
 
     /**
      * @param string $messageClass
-     * @param int $key
-     * @param int $type
-     * @param int $qbytes
+     * @param int    $key
+     * @param int    $type
+     * @param int    $qbytes
      */
     public function __construct(string $messageClass, int $key, int $type = 1, int $qbytes = 16384)
     {
         $this->messageClass = $messageClass;
         $this->queue = msg_get_queue($key);
         $this->type = $type;
-        $this->qbytes = $qbytes;
+        $this->maxBytesPerMessage = $qbytes / 2;
 
-        msg_set_queue($this->queue, ['msg_qbytes' => $this->qbytes]);
+        msg_set_queue($this->queue, ['msg_qbytes' => $qbytes]);
     }
 
     /**
@@ -58,7 +58,7 @@ final class SystemVReceive implements MessageReceiveInterface
             $this->queue,
             $this->type,
             $type,
-            $this->qbytes / 2,
+            $this->maxBytesPerMessage,
             $json,
             false,
             MSG_IPC_NOWAIT,
