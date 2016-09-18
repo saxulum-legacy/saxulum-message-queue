@@ -4,6 +4,7 @@ php:
   - 7.0
 
 services:
+  - rabbitmq
   - redis-server
 
 before_script:

@@ -91,6 +91,36 @@ class SampleMessage implements MessageInterface
 }
 ```
 
+### RabbitMQ
+
+#### Send
+
+```{.php}
+<?php
+
+use My\Project\SampleMessage;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use Saxulum\MessageQueue\Redis\RedisSend;
+
+$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$sender = new RabbitMQSend($connection, 'messages');
+$sender->send(new SampleMessage('context', 'this is a message'));
+```
+
+#### Receive
+
+```{.php}
+<?php
+
+use My\Project\SampleMessage;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use Saxulum\MessageQueue\Redis\RedisReceive;
+
+$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$receive = new RabbitMQReceive(SampleMessage::class, $connection, 'messages');
+$message = $sender->receive();
+```
+
 ### Redis
 
 #### Send

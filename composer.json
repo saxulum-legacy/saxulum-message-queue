@@ -1,7 +1,7 @@
 {
     "name": "saxulum/saxulum-message-queue",
     "description": "Saxulum Message Queue",
-    "keywords": ["saxulum", "message-queue", "system-v", "redis"],
+    "keywords": ["saxulum", "message-queue", "rabbitmq", "redis", "system-v"],
     "license": "MIT",
     "authors": [
         {
@@ -15,13 +15,15 @@
     "require-dev": {
         "phpunit/phpunit": "~5.5",
         "symfony/process": "~3.1",
-        "predis/predis": "^1.1.1"
+        "predis/predis": "^1.1.1",
+        "php-amqplib/php-amqplib": "^2.6.3"
     },
     "autoload": {
         "psr-4": { "Saxulum\\MessageQueue\\": "src/" }
     },
     "suggest": {
-        "predis/predis": "Allows to use the Redis message queue implementation"
+        "predis/predis": "Allows to use the Redis message queue implementation",
+        "php-amqplib/php-amqplib": "Allows to use the Rabbitmq message queue implementation"
     },
     "extra": {
         "branch-alias": {
