@@ -93,6 +93,15 @@ class SampleMessage implements MessageInterface
 
 ### RabbitMQ
 
+#### Additional Requirements
+```{.json}
+{
+    "require": {
+        "php-amqplib/php-amqplib": "^2.6.3"
+    }
+}
+```
+
 #### Send
 
 ```{.php}
@@ -122,6 +131,15 @@ $message = $sender->receive();
 ```
 
 ### Redis
+
+#### Additional Requirements
+```{.json}
+{
+    "require": {
+        "predis/predis": "^1.1.1"
+    }
+}
+```
 
 #### Send
 
