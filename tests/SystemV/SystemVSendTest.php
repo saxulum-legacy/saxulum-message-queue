@@ -9,7 +9,7 @@ use Saxulum\Tests\MessageQueue\Resources\SampleMessage;
 
 /**
  * @group unit
- * @coverage Saxulum\MessageQueue\SystemV\SystemVSend
+ * @covers Saxulum\MessageQueue\SystemV\SystemVSend
  */
 final class SystemVSendTest extends TestCase
 {

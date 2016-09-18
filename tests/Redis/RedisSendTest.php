@@ -10,7 +10,7 @@ use Saxulum\Tests\MessageQueue\Resources\SampleMessage;
 
 /**
  * @group unit
- * @coverage Saxulum\MessageQueue\Redis\RedisSend
+ * @covers Saxulum\MessageQueue\Redis\RedisSend
  */
 final class RedisSendTest extends TestCase
 {

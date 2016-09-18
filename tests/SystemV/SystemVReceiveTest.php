@@ -9,7 +9,8 @@ use Saxulum\Tests\MessageQueue\Resources\SampleMessage;
 
 /**
  * @group unit
- * @coverage Saxulum\MessageQueue\SystemV\SystemVReceive
+ * @covers Saxulum\MessageQueue\SystemV\SystemVReceive
+ * @covers Saxulum\MessageQueue\AbstractMessageReceive
  */
 final class SystemVReceiveTest extends TestCase
 {

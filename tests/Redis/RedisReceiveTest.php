@@ -10,7 +10,8 @@ use Saxulum\Tests\MessageQueue\Resources\SampleMessage;
 
 /**
  * @group unit
- * @coverage Saxulum\MessageQueue\Redis\RedisReceive
+ * @covers Saxulum\MessageQueue\Redis\RedisReceive
+ * @covers Saxulum\MessageQueue\AbstractMessageReceive
  */
 final class RedisReceiveTest extends TestCase
 {
