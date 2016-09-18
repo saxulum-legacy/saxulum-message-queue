@@ -91,6 +91,36 @@ class SampleMessage implements MessageInterface
 }
 ```
 
+### Redis
+
+#### Send
+
+```{.php}
+<?php
+
+use My\Project\SampleMessage;
+use Predis\Client;
+use Saxulum\MessageQueue\Redis\RedisSend;
+
+$client = new Client();
+$sender = new RedisSend($client, 'messages');
+$sender->send(new SampleMessage('context', 'this is a message'));
+```
+
+#### Receive
+
+```{.php}
+<?php
+
+use My\Project\SampleMessage;
+use Predis\Client;
+use Saxulum\MessageQueue\Redis\RedisReceive;
+
+$client = new Client();
+$sender = new RedisReceive(SampleMessage::class, $client, 'messages');
+$message = $sender->receive();
+```
+
 ### SystemV
 
 #### Send
