@@ -3,6 +3,7 @@
 namespace Saxulum\MessageQueue\SystemV;
 
 use Saxulum\MessageQueue\MessageInterface;
+use Saxulum\MessageQueue\MessageReceiveException;
 use Saxulum\MessageQueue\MessageReceiveInterface;
 
 final class SystemVReceive implements MessageReceiveInterface
@@ -46,7 +47,7 @@ final class SystemVReceive implements MessageReceiveInterface
     /**
      * @return null|MessageInterface
      *
-     * @throws \Exception
+     * @throws MessageReceiveException
      */
     public function receive()
     {
@@ -71,12 +72,33 @@ final class SystemVReceive implements MessageReceiveInterface
                 return null;
             }
 
-            throw new \Exception(sprintf('Can\'t receive message, error code %d', $errorCode), $errorCode);
+            throw new MessageReceiveException(
+                sprintf(
+                    MessageReceiveException::MESSAGE_RECEIVE_FAILED,
+                    sprintf(' (SystemV error code %d)', $errorCode)
+                ),
+                MessageReceiveException::CODE_RECEIVE_FAILED
+            );
         }
 
         /** @var MessageInterface $messageClass */
         $messageClass = $this->messageClass;
 
         return $messageClass::fromJson($json);
+    }
+
+    /**
+     * @return array
+     *
+     * @throws MessageReceiveException
+     */
+    public function receiveAll(): array
+    {
+        $messages = [];
+        while (null !== $message = $this->receive()) {
+            $messages[] = $message;
+        }
+
+        return $messages;
     }
 }

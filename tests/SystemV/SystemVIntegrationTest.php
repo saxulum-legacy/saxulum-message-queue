@@ -9,8 +9,9 @@ use Symfony\Component\Process\Process;
 
 /**
  * @group integration
+ * @coversNothing
  */
-class SystemVIntegrationTest extends TestCase
+final class SystemVIntegrationTest extends TestCase
 {
     /**
      * @runInSeparateProcess
@@ -39,6 +40,7 @@ class SystemVIntegrationTest extends TestCase
         }
 
         $receive = new SystemVReceive(SampleMessage::class, 1);
+        $receive->receiveAll(); // clean existing message
 
         /** @var SampleMessage[] $receivedMessages */
         $receivedMessages = [];
@@ -51,9 +53,7 @@ class SystemVIntegrationTest extends TestCase
                 }
             }
 
-            while (null !== $receivedMessage = $receive->receive()) {
-                $receivedMessages[] = $receivedMessage;
-            }
+            $receivedMessages = array_merge($receivedMessages, $receive->receiveAll());
         } while ([] !== $subProcessesRunning);
 
         $receivedMessagesBySubProcesses = [];

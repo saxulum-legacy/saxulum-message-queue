@@ -3,6 +3,7 @@
 namespace Saxulum\Tests\MessageQueue\SystemV;
 
 use PHPUnit\Framework\TestCase;
+use Saxulum\MessageQueue\MessageSendException;
 use Saxulum\MessageQueue\SystemV\SystemVSend;
 use Saxulum\Tests\MessageQueue\Resources\SampleMessage;
 
@@ -10,7 +11,7 @@ use Saxulum\Tests\MessageQueue\Resources\SampleMessage;
  * @group unit
  * @coverage Saxulum\MessageQueue\SystemV\SystemVSend
  */
-class SystemVSendTest extends TestCase
+final class SystemVSendTest extends TestCase
 {
     /**
      * @runInSeparateProcess
@@ -56,13 +57,11 @@ EOT;
     /**
      * @runInSeparateProcess
      */
-    public function testWithErrorCode()
+    public function testWithMessageExpectMessageSendExceptionSendFailed()
     {
-        self::expectException(\Exception::class);
-        self::expectExceptionMessage(
-            'Can\'t send message, error code 1000, {"context":"subprocess1","message":"message 1"}'
-        );
-        self::expectExceptionCode(1000);
+        self::expectException(MessageSendException::class);
+        self::expectExceptionMessage(MessageSendException::MESSAGE_SEND_FAILED);
+        self::expectExceptionCode(MessageSendException::CODE_SEND_FAILED);
 
         $cFunctions = <<<'EOT'
 namespace Saxulum\MessageQueue\SystemV

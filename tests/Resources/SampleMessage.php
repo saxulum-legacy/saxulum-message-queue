@@ -4,7 +4,7 @@ namespace Saxulum\Tests\MessageQueue\Resources;
 
 use Saxulum\MessageQueue\MessageInterface;
 
-class SampleMessage implements MessageInterface
+final class SampleMessage implements MessageInterface
 {
     /**
      * @var string

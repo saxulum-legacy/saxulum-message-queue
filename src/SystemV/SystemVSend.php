@@ -3,6 +3,7 @@
 namespace Saxulum\MessageQueue\SystemV;
 
 use Saxulum\MessageQueue\MessageInterface;
+use Saxulum\MessageQueue\MessageSendException;
 use Saxulum\MessageQueue\MessageSendInterface;
 
 final class SystemVSend implements MessageSendInterface
@@ -32,7 +33,7 @@ final class SystemVSend implements MessageSendInterface
      *
      * @return MessageSendInterface
      *
-     * @throws \Exception
+     * @throws MessageSendException
      */
     public function send(MessageInterface $message): MessageSendInterface
     {
@@ -40,7 +41,10 @@ final class SystemVSend implements MessageSendInterface
         $json = $message->toJson();
 
         if (false === msg_send($this->queue, $this->type, $json, false, true, $errorCode)) {
-            throw new \Exception(sprintf('Can\'t send message, error code %d, %s', $errorCode, $json), $errorCode);
+            throw new MessageSendException(
+                sprintf(MessageSendException::MESSAGE_SEND_FAILED, sprintf(' (SystemV error code %d)', $errorCode)),
+                MessageSendException::CODE_SEND_FAILED
+            );
         }
 
         return $this;
