@@ -2,11 +2,11 @@
 
 namespace Saxulum\MessageQueue\SystemV;
 
+use Saxulum\MessageQueue\AbstractMessageReceive;
 use Saxulum\MessageQueue\MessageInterface;
 use Saxulum\MessageQueue\MessageReceiveException;
-use Saxulum\MessageQueue\MessageReceiveInterface;
 
-final class SystemVReceive implements MessageReceiveInterface
+final class SystemVReceive extends AbstractMessageReceive
 {
     /**
      * @var string
@@ -85,20 +85,5 @@ final class SystemVReceive implements MessageReceiveInterface
         $messageClass = $this->messageClass;
 
         return $messageClass::fromJson($json);
-    }
-
-    /**
-     * @return array
-     *
-     * @throws MessageReceiveException
-     */
-    public function receiveAll(): array
-    {
-        $messages = [];
-        while (null !== $message = $this->receive()) {
-            $messages[] = $message;
-        }
-
-        return $messages;
     }
 }

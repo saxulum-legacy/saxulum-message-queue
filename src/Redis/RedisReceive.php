@@ -3,11 +3,11 @@
 namespace Saxulum\MessageQueue\Redis;
 
 use Predis\ClientInterface;
+use Saxulum\MessageQueue\AbstractMessageReceive;
 use Saxulum\MessageQueue\MessageInterface;
 use Saxulum\MessageQueue\MessageReceiveException;
-use Saxulum\MessageQueue\MessageReceiveInterface;
 
-final class RedisReceive implements MessageReceiveInterface
+final class RedisReceive extends AbstractMessageReceive
 {
     /**
      * @var string
